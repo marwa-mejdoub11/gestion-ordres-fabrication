@@ -41,9 +41,11 @@ export class Machines implements OnInit {
     this.newMachine = { ...m };
   }
 
-  delete(id: number) {
+  confirmDelete(id: number) {
+  if (confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) {
     this.machineService.delete(id).subscribe(() => this.load());
   }
+}
 
   reset() {
     this.newMachine = { nom: '', etat: '', derniereMaintenance: '' };

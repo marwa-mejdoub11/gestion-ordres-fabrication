@@ -45,9 +45,11 @@ export class Produits implements OnInit {
     this.newProduit = { ...p };
   }
 
-  delete(id: number) {
+ confirmDelete(id: number) {
+  if (confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) {
     this.produitService.delete(id).subscribe(() => this.load());
   }
+}
 
   reset() {
     this.newProduit = { nom: '', type: '', stock: 0, fournisseur: '' };

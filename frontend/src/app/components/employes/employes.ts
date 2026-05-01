@@ -54,9 +54,11 @@ export class Employes implements OnInit {
     this.selectedMachineId = e.machineAssignee?.id || null;
   }
 
-  delete(id: number) {
+confirmDelete(id: number) {
+  if (confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) {
     this.employeService.delete(id).subscribe(() => this.load());
   }
+}
 
   reset() {
     this.newEmploye = { nom: '', poste: '' };

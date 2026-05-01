@@ -68,7 +68,10 @@
         </td>
         <td>
           <button class="btn btn-warning btn-sm me-2" (click)="edit(o)">Modifier</button>
-          <button class="btn btn-danger btn-sm" (click)="delete(o.id!)">Supprimer</button>
+          <button class="btn btn-danger btn-sm" 
+  (click)="confirmDelete(o.id!)">
+  Supprimer
+</button>
         </td>
       </tr>
     </tbody>

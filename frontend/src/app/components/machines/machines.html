@@ -54,7 +54,10 @@
         <td>{{ m.derniereMaintenance }}</td>
         <td>
           <button class="btn btn-warning btn-sm me-2" (click)="edit(m)">Modifier</button>
-          <button class="btn btn-danger btn-sm" (click)="delete(m.id!)">Supprimer</button>
+          <button class="btn btn-danger btn-sm" 
+  (click)="confirmDelete(m.id!)">
+  Supprimer
+</button>
         </td>
       </tr>
     </tbody>

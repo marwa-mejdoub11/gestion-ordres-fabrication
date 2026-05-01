@@ -54,9 +54,11 @@ export class Ordres implements OnInit {
     this.selectedProduitId = o.produit?.id || null;
   }
 
-  delete(id: number) {
+confirmDelete(id: number) {
+  if (confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) {
     this.ordreService.delete(id).subscribe(() => this.load());
   }
+}
 
   reset() {
     this.newOrdre = { projet: '', quantite: 1, date: '', etat: 'EN_ATTENTE' };
