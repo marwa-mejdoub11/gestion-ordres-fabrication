@@ -1,0 +1,126 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Dashboard</h2>
+
+  <!-- Statistiques générales -->
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <div class="card text-white bg-primary">
+        <div class="card-body text-center">
+          <h1>{{ totalOrdres }}</h1>
+          <p class="mb-0">Ordres de fabrication</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-success">
+        <div class="card-body text-center">
+          <h1>{{ totalProduits }}</h1>
+          <p class="mb-0">Produits</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-warning">
+        <div class="card-body text-center">
+          <h1>{{ totalMachines }}</h1>
+          <p class="mb-0">Machines</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-info">
+        <div class="card-body text-center">
+          <h1>{{ totalEmployes }}</h1>
+          <p class="mb-0">Employés</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ordres par état -->
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-dark text-white">
+          <h5 class="mb-0">Ordres par état</h5>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span>En attente</span>
+            <span class="badge bg-warning fs-6">{{ ordresEnAttente }}</span>
+          </div>
+          <div class="progress mb-3">
+            <div class="progress-bar bg-warning"
+              [style.width.%]="totalOrdres > 0 ? (ordresEnAttente / totalOrdres * 100) : 0">
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span>En cours</span>
+            <span class="badge bg-primary fs-6">{{ ordresEnCours }}</span>
+          </div>
+          <div class="progress mb-3">
+            <div class="progress-bar bg-primary"
+              [style.width.%]="totalOrdres > 0 ? (ordresEnCours / totalOrdres * 100) : 0">
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span>Terminés</span>
+            <span class="badge bg-success fs-6">{{ ordresTermines }}</span>
+          </div>
+          <div class="progress mb-3">
+            <div class="progress-bar bg-success"
+              [style.width.%]="totalOrdres > 0 ? (ordresTermines / totalOrdres * 100) : 0">
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span>Annulés</span>
+            <span class="badge bg-danger fs-6">{{ ordresAnnules }}</span>
+          </div>
+          <div class="progress mb-3">
+            <div class="progress-bar bg-danger"
+              [style.width.%]="totalOrdres > 0 ? (ordresAnnules / totalOrdres * 100) : 0">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Machines par état -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-dark text-white">
+          <h5 class="mb-0">Machines par état</h5>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span>Disponibles</span>
+            <span class="badge bg-success fs-6">{{ machinesDisponibles }}</span>
+          </div>
+          <div class="progress mb-3">
+            <div class="progress-bar bg-success"
+              [style.width.%]="totalMachines > 0 ? (machinesDisponibles / totalMachines * 100) : 0">
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span>En panne</span>
+            <span class="badge bg-danger fs-6">{{ machinesEnPanne }}</span>
+          </div>
+          <div class="progress mb-3">
+            <div class="progress-bar bg-danger"
+              [style.width.%]="totalMachines > 0 ? (machinesEnPanne / totalMachines * 100) : 0">
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span>En maintenance</span>
+            <span class="badge bg-warning fs-6">{{ machinesEnMaintenance }}</span>
+          </div>
+          <div class="progress mb-3">
+            <div class="progress-bar bg-warning"
+              [style.width.%]="totalMachines > 0 ? (machinesEnMaintenance / totalMachines * 100) : 0">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
