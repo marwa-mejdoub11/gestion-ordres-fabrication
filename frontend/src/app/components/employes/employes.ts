@@ -13,6 +13,7 @@ import { MachineService, Machine } from '../../services/machine';
 export class Employes implements OnInit {
   employes: Employe[] = [];
   machines: Machine[] = [];
+  machinesDisponibles: Machine[] = []; // Nouvelle propriété
   newEmploye: Employe = { nom: '', poste: '' };
   editMode = false;
   editId: number | null = null;
@@ -25,11 +26,19 @@ export class Employes implements OnInit {
 
   ngOnInit() {
     this.load();
-    this.machineService.getAll().subscribe(data => this.machines = data);
+    this.loadMachines();
   }
 
   load() {
     this.employeService.getAll().subscribe(data => this.employes = data);
+  }
+
+  loadMachines() {
+    this.machineService.getAll().subscribe(data => {
+      this.machines = data;
+      // Filtrer uniquement les machines disponibles
+      this.machinesDisponibles = data.filter(m => m.etat === 'DISPONIBLE');
+    });
   }
 
   save() {

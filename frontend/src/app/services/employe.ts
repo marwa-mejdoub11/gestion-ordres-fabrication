@@ -6,7 +6,7 @@ export interface Employe {
   id?: number;
   nom: string;
   poste: string;
-  machineAssignee?: { id: number };
+  machineAssignee?: { id: number; nom?: string; etat?: string };
 }
 
 @Injectable({

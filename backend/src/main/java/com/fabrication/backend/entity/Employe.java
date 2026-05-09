@@ -1,5 +1,6 @@
 package com.fabrication.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -22,5 +23,6 @@ public class Employe {
 
     @ManyToOne
     @JoinColumn(name = "machine_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Machine machineAssignee;
 }

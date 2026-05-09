@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+
+  # ─────────────────────────────────────────
+  # Base de données MySQL
+  # ─────────────────────────────────────────
+  mysql:
+    image: mysql:8.0
+    container_name: fabrication-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fabrication
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - fabrication-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─────────────────────────────────────────
+  # Backend Spring Boot
+  # ─────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: fabrication-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/fabrication?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - fabrication-network
+
+  # ─────────────────────────────────────────
+  # Frontend Angular (Nginx)
+  # ─────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: fabrication-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - fabrication-network
+
+# ─────────────────────────────────────────
+# Volumes et réseaux
+# ─────────────────────────────────────────
+volumes:
+  mysql-data:
+    driver: local
+
+networks:
+  fabrication-network:
+    driver: bridge

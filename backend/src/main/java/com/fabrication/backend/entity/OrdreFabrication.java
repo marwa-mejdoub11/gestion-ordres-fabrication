@@ -1,5 +1,6 @@
 package com.fabrication.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -20,6 +21,7 @@ public class OrdreFabrication {
 
     @ManyToOne
     @JoinColumn(name = "produit_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Produit produit;
 
     @Min(value = 1, message = "La quantité doit être supérieure à 0")

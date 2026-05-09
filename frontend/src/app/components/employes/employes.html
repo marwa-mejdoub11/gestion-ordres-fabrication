@@ -14,7 +14,7 @@
         <div class="col-md-3">
           <select [(ngModel)]="selectedMachineId" class="form-select">
             <option [value]="null">-- Machine assignée --</option>
-            <option *ngFor="let m of machines" [value]="m.id">{{ m.nom }}</option>
+            <option *ngFor="let m of machinesDisponibles" [value]="m.id">{{ m.nom }} ({{ m.etat }})</option>
           </select>
         </div>
         <div class="col-md-2">
@@ -42,7 +42,7 @@
         <td>{{ e.id }}</td>
         <td>{{ e.nom }}</td>
         <td>{{ e.poste }}</td>
-        <td>{{ e.machineAssignee?.id || 'Aucune' }}</td>
+        <td>{{ e.machineAssignee?.nom || 'Aucune' }}</td>
         <td>
           <button class="btn btn-warning btn-sm me-2" (click)="edit(e)">Modifier</button>
           <button class="btn btn-danger btn-sm" 

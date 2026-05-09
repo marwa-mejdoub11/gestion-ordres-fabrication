@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 export interface Ordre {
   id?: number;
   projet: string;
-  produit?: { id: number };
+  produit?: { id: number; nom?: string };
   quantite: number;
   date: string;
   etat: string;
