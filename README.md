@@ -2,6 +2,14 @@
 
 Application web de gestion des ordres de fabrication développée avec **Spring Boot** (Backend) et **Angular** (Frontend).
 
+## 🌐 Application en Ligne
+
+**URL de démonstration** : http://34.76.106.238
+
+L'application est déployée sur Google Cloud Platform (Compute Engine) avec Docker Compose.
+
+---
+
 ## 📋 Description du Projet
 
 Cette application permet de gérer l'ensemble du processus de fabrication d'une usine, incluant :
