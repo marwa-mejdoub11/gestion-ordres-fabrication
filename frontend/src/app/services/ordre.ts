@@ -15,7 +15,7 @@ export interface Ordre {
   providedIn: 'root'
 })
 export class OrdreService {
-  private apiUrl = 'http://localhost:8080/api/ordres';
+  private apiUrl = '/api/ordres';
 
   constructor(private http: HttpClient) {}
 

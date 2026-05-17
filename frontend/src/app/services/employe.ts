@@ -13,7 +13,7 @@ export interface Employe {
   providedIn: 'root'
 })
 export class EmployeService {
-  private apiUrl = 'http://localhost:8080/api/employes';
+  private apiUrl = '/api/employes';
 
   constructor(private http: HttpClient) {}
 

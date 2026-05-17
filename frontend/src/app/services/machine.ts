@@ -13,7 +13,7 @@ export interface Machine {
   providedIn: 'root'
 })
 export class MachineService {
-  private apiUrl = 'http://localhost:8080/api/machines';
+  private apiUrl = '/api/machines';
 
   constructor(private http: HttpClient) {}
 
