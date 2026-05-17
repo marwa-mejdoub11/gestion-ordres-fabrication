@@ -17,6 +17,7 @@ export class Ordres implements OnInit {
   editMode = false;
   editId: number | null = null;
   selectedProduitId: number | null = null;
+  errorMessage: string = ''; // Nouveau : pour afficher les erreurs
 
   constructor(
     private ordreService: OrdreService,
@@ -33,16 +34,31 @@ export class Ordres implements OnInit {
   }
 
   save() {
+    this.errorMessage = ''; // Réinitialiser le message d'erreur
     if (this.selectedProduitId) {
       this.newOrdre.produit = { id: this.selectedProduitId };
     }
     if (this.editMode && this.editId) {
-      this.ordreService.update(this.editId, this.newOrdre).subscribe(() => {
-        this.load(); this.reset();
+      this.ordreService.update(this.editId, this.newOrdre).subscribe({
+        next: () => {
+          this.load(); 
+          this.reset();
+        },
+        error: (err) => {
+          this.errorMessage = err.error?.message || err.error || 'Erreur lors de la modification';
+          console.error('Erreur:', err);
+        }
       });
     } else {
-      this.ordreService.create(this.newOrdre).subscribe(() => {
-        this.load(); this.reset();
+      this.ordreService.create(this.newOrdre).subscribe({
+        next: () => {
+          this.load(); 
+          this.reset();
+        },
+        error: (err) => {
+          this.errorMessage = err.error?.message || err.error || 'Erreur lors de la création';
+          console.error('Erreur:', err);
+        }
       });
     }
   }
@@ -65,5 +81,6 @@ confirmDelete(id: number) {
     this.editMode = false;
     this.editId = null;
     this.selectedProduitId = null;
+    this.errorMessage = ''; // Réinitialiser le message d'erreur
   }
 }

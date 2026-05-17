@@ -4,6 +4,13 @@
   <div class="card mb-4">
     <div class="card-body">
       <h5>{{ editMode ? 'Modifier' : 'Créer' }} un ordre</h5>
+      
+      <!-- Message d'erreur -->
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Erreur !</strong> {{ errorMessage }}
+        <button type="button" class="btn-close" (click)="errorMessage = ''" aria-label="Close"></button>
+      </div>
+      
       <div class="row g-2">
         <div class="col-md-2">
           <input [(ngModel)]="newOrdre.projet" class="form-control" placeholder="Projet">
