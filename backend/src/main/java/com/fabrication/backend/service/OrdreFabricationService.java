@@ -42,6 +42,9 @@ public class OrdreFabricationService {
             // Diminuer le stock
             produit.setStock(produit.getStock() - ordre.getQuantite());
             produitRepository.save(produit);
+            
+            // Assigner le produit complet à l'ordre
+            ordre.setProduit(produit);
         }
         
         return ordreRepository.save(ordre);
