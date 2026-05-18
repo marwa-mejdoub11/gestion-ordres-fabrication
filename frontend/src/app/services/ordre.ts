@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_CONFIG } from '../config/api.config';
 
 export interface Ordre {
   id?: number;
@@ -15,7 +16,7 @@ export interface Ordre {
   providedIn: 'root'
 })
 export class OrdreService {
-  private apiUrl = '/api/ordres';
+  private apiUrl = `${API_CONFIG.baseUrl}/ordres`;
 
   constructor(private http: HttpClient) {}
 

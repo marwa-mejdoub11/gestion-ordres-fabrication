@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_CONFIG } from '../config/api.config';
 
 export interface Machine {
   id?: number;
@@ -13,7 +14,7 @@ export interface Machine {
   providedIn: 'root'
 })
 export class MachineService {
-  private apiUrl = '/api/machines';
+  private apiUrl = `${API_CONFIG.baseUrl}/machines`;
 
   constructor(private http: HttpClient) {}
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_CONFIG } from '../config/api.config';
 
 export interface Employe {
   id?: number;
@@ -13,7 +14,7 @@ export interface Employe {
   providedIn: 'root'
 })
 export class EmployeService {
-  private apiUrl = '/api/employes';
+  private apiUrl = `${API_CONFIG.baseUrl}/employes`;
 
   constructor(private http: HttpClient) {}
 
