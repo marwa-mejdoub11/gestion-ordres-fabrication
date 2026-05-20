@@ -47,7 +47,15 @@ export class Produits implements OnInit {
 
  confirmDelete(id: number) {
   if (confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) {
-    this.produitService.delete(id).subscribe(() => this.load());
+    this.produitService.delete(id).subscribe({
+      next: () => {
+        this.load();
+      },
+      error: (err) => {
+        console.error('Erreur lors de la suppression:', err);
+        alert('Erreur lors de la suppression: ' + (err.error?.message || err.message || 'Erreur inconnue'));
+      }
+    });
   }
 }
 

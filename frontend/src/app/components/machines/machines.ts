@@ -42,10 +42,18 @@ export class Machines implements OnInit {
   }
 
   confirmDelete(id: number) {
-  if (confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) {
-    this.machineService.delete(id).subscribe(() => this.load());
+    if (confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) {
+      this.machineService.delete(id).subscribe({
+        next: () => {
+          this.load();
+        },
+        error: (err) => {
+          console.error('Erreur lors de la suppression:', err);
+          alert('Erreur lors de la suppression: ' + (err.error?.message || err.message || 'Erreur inconnue'));
+        }
+      });
+    }
   }
-}
 
   reset() {
     this.newMachine = { nom: '', etat: '', derniereMaintenance: '' };
