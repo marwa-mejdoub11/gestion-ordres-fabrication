@@ -35,6 +35,11 @@ public class ProduitService {
     }
 
     public void delete(Long id) {
+        // Vérifier si le produit existe
+        Produit produit = getById(id);
+        
+        // Note : Si le produit est utilisé dans des ordres, MySQL retournera une erreur
+        // C'est voulu pour protéger l'intégrité des données
         produitRepository.deleteById(id);
     }
 }
