@@ -53,7 +53,16 @@ export class Produits implements OnInit {
       },
       error: (err) => {
         console.error('Erreur lors de la suppression:', err);
-        alert('Erreur lors de la suppression: ' + (err.error?.message || err.message || 'Erreur inconnue'));
+        // Extraire le message d'erreur du backend
+        let errorMessage = 'Erreur lors de la suppression';
+        if (err.error && typeof err.error === 'string') {
+          errorMessage = err.error;
+        } else if (err.error && err.error.message) {
+          errorMessage = err.error.message;
+        } else if (err.message) {
+          errorMessage = err.message;
+        }
+        alert(errorMessage);
       }
     });
   }
